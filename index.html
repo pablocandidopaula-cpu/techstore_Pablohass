@@ -426,10 +426,10 @@
       const email = document.getElementById('email').value.trim();
       const message = document.getElementById('message').value.trim();
       // Troque o endereço abaixo pelo e-mail oficial da equipe antes de divulgar.
-      const recipient = 'contato@exemplo.com';
+      const recipient = 'pe280609@gmail.com';
       const subject = encodeURIComponent('Contato sobre a Horta Inteligente');
       const body = encodeURIComponent(`Nome: ${name}\nE-mail: ${email}\n\nMensagem:\n${message}`);
-      if (recipient === 'contato@exemplo.com') {
+      if (recipient === 'pe280609@gmail.com') {
         toast.textContent = 'Formulário demonstrativo: edite contato@exemplo.com no código para usar o e-mail real da equipe.';
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 5000);

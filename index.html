@@ -1,137 +1,442 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conheça a Horta Inteligente: tecnologia e sustentabilidade para cuidar das plantas com irrigação automática.">
+  <title>Horta Inteligente | Tecnologia que cultiva o futuro</title>
+  <style>
+    :root {
+      --green: #167344;
+      --green-dark: #0b4228;
+      --green-bright: #38b66a;
+      --mint: #eaf8ef;
+      --cream: #f8fbf7;
+      --ink: #183126;
+      --muted: #607469;
+      --line: #dce9df;
+      --white: #fff;
+      --shadow: 0 16px 40px rgba(15, 67, 39, .10);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    .container { width: min(1140px, calc(100% - 40px)); margin: auto; }
+    .topbar { background: var(--green-dark); color: #e9fff0; font-size: .86rem; text-align: center; padding: 8px 12px; }
+    header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(220,233,223,.8); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 850; letter-spacing: -.04em; font-size: 1.12rem; }
+    .brand-mark { width: 42px; height: 42px; display: grid; place-items: center; background: var(--green); color: white; border-radius: 14px; font-size: 1.45rem; }
+    .brand span small { display: block; color: var(--muted); letter-spacing: .04em; font-size: .65rem; font-weight: 700; }
+    .nav-links { display: flex; gap: 25px; align-items: center; color: #496356; font-size: .92rem; font-weight: 650; }
+    .nav-links a:hover { color: var(--green); }
+    .btn { border: 0; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 21px; background: var(--green); color: white; font-weight: 750; cursor: pointer; transition: transform .2s, background .2s, box-shadow .2s; box-shadow: 0 8px 20px rgba(22,115,68,.18); }
+    .btn:hover { background: var(--green-dark); transform: translateY(-2px); }
+    .btn.secondary { color: var(--green-dark); background: white; box-shadow: none; border: 1px solid var(--line); }
+    .btn.secondary:hover { background: var(--mint); }
+    .menu-btn { display: none; border: 1px solid var(--line); background: white; border-radius: 12px; padding: 9px 12px; font-size: 1.25rem; }
+    .hero { overflow: hidden; padding: 78px 0 72px; background: radial-gradient(circle at 85% 22%, #d8f5df 0, transparent 30%), linear-gradient(135deg,#f8fbf7,#eef9f0); }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 55px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--green); background: #e1f5e7; border: 1px solid #c8ebd2; border-radius: 999px; padding: 7px 13px; font-size: .82rem; font-weight: 800; }
+    h1 { font-size: clamp(2.55rem, 5.4vw, 4.6rem); line-height: 1.03; letter-spacing: -.065em; margin: 20px 0; max-width: 690px; }
+    h1 em { color: var(--green); font-style: normal; }
+    .hero p { max-width: 560px; font-size: 1.1rem; color: var(--muted); margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-note { margin-top: 24px; display: flex; align-items: center; gap: 9px; font-size: .88rem; color: var(--muted); }
+    .hero-art { position: relative; min-height: 430px; display: grid; place-items: center; }
+    .art-glow { position: absolute; width: 360px; height: 360px; background: #d2f0d9; border-radius: 50%; }
+    .plant-card { position: relative; width: min(100%, 450px); background: rgba(255,255,255,.9); border: 1px solid white; box-shadow: var(--shadow); border-radius: 28px; padding: 22px; transform: rotate(1.5deg); }
+    .plant-scene { height: 255px; border-radius: 19px; position: relative; overflow: hidden; background: linear-gradient(#ccefd6 0 58%, #a56b45 58% 100%); }
+    .sun { position: absolute; right: 28px; top: 24px; width: 52px; height: 52px; border-radius: 50%; background: #ffd66b; box-shadow: 0 0 0 12px rgba(255,214,107,.2); }
+    .leaf { position: absolute; width: 57px; height: 85px; background: linear-gradient(135deg,#52c878,#147342); border-radius: 100% 0 100% 0; transform-origin: bottom center; box-shadow: inset -5px -5px 0 rgba(0,0,0,.08); }
+    .leaf:after { content:""; position:absolute; width:2px; height:75%; background:#b9efc5; left:50%; top:12%; transform:rotate(-16deg); opacity:.75; }
+    .stem { position:absolute; width:6px; height:115px; background:#247a43; left:50%; bottom:50px; border-radius:5px; }
+    .leaf.l1 { left: 112px; bottom: 118px; transform: rotate(-44deg) scale(.9); }
+    .leaf.l2 { left: 168px; bottom: 120px; transform: rotate(12deg) scale(1.08); }
+    .leaf.l3 { left: 205px; bottom: 95px; transform: rotate(45deg) scale(.8); }
+    .leaf.l4 { left: 145px; bottom: 76px; transform: rotate(-65deg) scale(.7); }
+    .leaf.l5 { left: 200px; bottom: 69px; transform: rotate(70deg) scale(.7); }
+    .soil { position: absolute; bottom: 0; left: 0; right: 0; height: 58px; background: repeating-linear-gradient(165deg,#88502e,#88502e 9px,#9b6037 10px,#9b6037 16px); }
+    .sensor-stick { position:absolute; left: 65%; bottom: 25px; height: 94px; width: 12px; border-radius: 5px; background:#d6e2dc; border:2px solid #6e8778; transform:rotate(8deg); }
+    .sensor-stick:after { content:""; position:absolute; width:3px; height:40px; background:#6e8778; bottom:-30px; left:2px; box-shadow:4px 0 #6e8778; }
+    .water-drop { position:absolute; right:70px; bottom:70px; color:#1b9ad1; font-size:2rem; animation: bob 2s infinite ease-in-out; }
+    @keyframes bob { 50% { transform: translateY(-8px); } }
+    .status-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 4px 3px; }
+    .status-label { color:var(--muted); font-size:.78rem; }
+    .status-value { font-size:1.05rem; font-weight:850; }
+    .status-pill { color:#0d7c40; background:#e1f7e8; border-radius:999px; padding:7px 11px; font-size:.78rem; font-weight:800; }
+    .float-chip { position:absolute; display:flex; align-items:center; gap:9px; background:white; border:1px solid var(--line); border-radius:15px; box-shadow:var(--shadow); padding:12px 15px; font-weight:750; font-size:.88rem; }
+    .float-chip.one { left:-12px; top:55px; }
+    .float-chip.two { right:-8px; bottom:38px; }
+    .chip-icon { display:grid; place-items:center; width:34px; height:34px; border-radius:11px; background:var(--mint); }
+    section { padding: 78px 0; }
+    .section-head { text-align:center; max-width:720px; margin:0 auto 42px; }
+    .section-head .eyebrow { margin-bottom:12px; }
+    h2 { margin:0 0 14px; font-size:clamp(2rem,3.6vw,3rem); line-height:1.1; letter-spacing:-.05em; }
+    .section-head p { color:var(--muted); margin:0; font-size:1.04rem; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .feature { background:white; border:1px solid var(--line); border-radius:var(--radius); padding:27px; box-shadow:0 6px 22px rgba(15,67,39,.035); }
+    .feature-icon { width:52px; height:52px; display:grid; place-items:center; border-radius:16px; background:var(--mint); font-size:1.55rem; margin-bottom:18px; }
+    .feature h3 { margin:0 0 8px; font-size:1.12rem; }
+    .feature p { color:var(--muted); margin:0; font-size:.95rem; }
+    .how { background:#edf8f0; }
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    .step { background:rgba(255,255,255,.85); border:1px solid #d7ebdc; border-radius:18px; padding:23px; }
+    .step-number { width:36px; height:36px; display:grid; place-items:center; color:white; background:var(--green); border-radius:12px; font-weight:850; margin-bottom:15px; }
+    .step h3 { margin:0 0 7px; font-size:1.03rem; }
+    .step p { margin:0; color:var(--muted); font-size:.91rem; }
+    .diagram-wrap { background:white; border:1px solid var(--line); border-radius:24px; padding:20px; box-shadow:var(--shadow); }
+    .diagram { display:block; width:100%; height:auto; }
+    .diagram-caption { color:var(--muted); font-size:.9rem; margin:12px 5px 0; }
+    .parts-grid { display:grid; grid-template-columns:1fr 1fr; gap:35px; align-items:center; }
+    .parts-list { display:grid; gap:13px; }
+    .part { display:flex; gap:14px; align-items:flex-start; background:white; border:1px solid var(--line); border-radius:15px; padding:15px; }
+    .part .emoji { font-size:1.5rem; width:42px; text-align:center; }
+    .part strong { display:block; margin-bottom:2px; }
+    .part span { color:var(--muted); font-size:.9rem; }
+    .demo-panel { border-radius:24px; background:linear-gradient(145deg,#0c4028,#167344); color:white; padding:30px; box-shadow:var(--shadow); }
+    .demo-panel h3 { margin:0 0 8px; font-size:1.45rem; }
+    .demo-panel p { color:#d6f2df; margin:0 0 20px; }
+    .meter { background:rgba(255,255,255,.18); border-radius:999px; height:12px; overflow:hidden; margin:13px 0 7px; }
+    .meter-fill { height:100%; width:42%; background:#7be49b; border-radius:999px; transition:width .5s; }
+    .demo-stats { display:flex; justify-content:space-between; align-items:center; gap:15px; }
+    .demo-stats strong { font-size:1.65rem; }
+    .demo-controls { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+    .demo-controls button { border:1px solid rgba(255,255,255,.28); background:rgba(255,255,255,.1); color:white; border-radius:12px; padding:10px 13px; cursor:pointer; font-weight:750; }
+    .demo-controls button:hover { background:rgba(255,255,255,.2); }
+    .demo-message { margin-top:15px; padding:12px 14px; border-radius:12px; background:rgba(255,255,255,.12); font-size:.9rem; }
+    .benefits { display:grid; grid-template-columns:repeat(4,1fr); gap:15px; }
+    .benefit { text-align:center; padding:23px 15px; border-radius:18px; background:white; border:1px solid var(--line); }
+    .benefit b { display:block; font-size:1.02rem; margin:10px 0 5px; }
+    .benefit p { color:var(--muted); margin:0; font-size:.88rem; }
+    .cta { padding:0 0 78px; }
+    .cta-box { display:flex; align-items:center; justify-content:space-between; gap:30px; padding:42px; border-radius:28px; background:linear-gradient(120deg,#dff5e5,#f1fbf3); border:1px solid #ccebd4; }
+    .cta-box h2 { font-size:clamp(1.8rem,3.2vw,2.6rem); margin-bottom:10px; }
+    .cta-box p { color:var(--muted); margin:0; max-width:650px; }
+    .contact-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:35px; }
+    .contact-info { background:#0c4028; color:white; border-radius:24px; padding:30px; }
+    .contact-info p { color:#d6f2df; }
+    .contact-info .contact-line { padding:12px 0; border-top:1px solid rgba(255,255,255,.16); }
+    form { background:white; border:1px solid var(--line); border-radius:24px; padding:28px; }
+    label { display:block; font-weight:750; font-size:.9rem; margin-bottom:6px; }
+    input, textarea { width:100%; border:1px solid #cfdfd3; border-radius:12px; padding:12px 13px; background:#fbfdfb; margin-bottom:16px; outline:none; }
+    input:focus, textarea:focus { border-color:var(--green); box-shadow:0 0 0 3px #dff5e5; }
+    textarea { min-height:110px; resize:vertical; }
+    .form-hint { color:var(--muted); font-size:.82rem; margin:12px 0 0; }
+    footer { background:#082d1d; color:#d7ebdd; padding:28px 0; font-size:.88rem; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+    .footer-inner strong { color:white; }
+    .back-top { color:#d7ebdd; }
+    .toast { position:fixed; left:50%; bottom:22px; transform:translate(-50%, 150%); opacity:0; z-index:99; background:#123b27; color:white; padding:13px 18px; border-radius:14px; box-shadow:var(--shadow); transition:.3s; max-width:calc(100% - 30px); text-align:center; }
+    .toast.show { transform:translate(-50%,0); opacity:1; }
+    @media (max-width: 900px) {
+      .nav-links { gap:14px; font-size:.84rem; }
+      .hero-grid { gap:25px; }
+      .hero-art { min-height:360px; }
+      .steps { grid-template-columns:repeat(2,1fr); }
+      .benefits { grid-template-columns:repeat(2,1fr); }
+      .features { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .container { width:min(100% - 28px, 1140px); }
+      .nav { min-height:66px; }
+      .menu-btn { display:block; }
+      .nav-links { display:none; position:absolute; left:14px; right:14px; top:70px; padding:16px; background:white; border:1px solid var(--line); border-radius:17px; box-shadow:var(--shadow); flex-direction:column; align-items:stretch; }
+      .nav-links.open { display:flex; }
+      .nav-links .btn { width:100%; }
+      .hero { padding:54px 0 45px; }
+      .hero-grid, .parts-grid, .contact-grid { grid-template-columns:1fr; }
+      .hero-grid { gap:12px; }
+      .hero-art { min-height:350px; }
+      .plant-card { width:min(100%,400px); }
+      .float-chip.one { left:0; top:25px; }
+      .float-chip.two { right:0; bottom:15px; }
+      section { padding:58px 0; }
+      .features, .steps { grid-template-columns:1fr; }
+      .cta-box { flex-direction:column; align-items:flex-start; padding:28px; }
+      .diagram-wrap { padding:9px; overflow-x:auto; }
+      .diagram { min-width:620px; }
+      .demo-panel { padding:23px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *, *:before, *:after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
 </head>
 <body>
+  <div class="topbar">🌿 Projeto educacional de tecnologia, automação e sustentabilidade</div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Horta Inteligente - início">
+        <span class="brand-mark">🌱</span>
+        <span>HORTA INTELIGENTE<small>TECNOLOGIA QUE CULTIVA</small></span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#componentes">Componentes</a>
+        <a href="#demonstracao">Demonstração</a>
+        <a href="#contato">Contato</a>
+        <a class="btn" href="#demonstracao">Conhecer o projeto ↗</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- ============================================================ -->
-    <!-- CABEÇALHO / BANNER                                            -->
-    <!-- Espaço em branco para inserir a imagem do banner.            -->
-    <!-- ============================================================ -->
-    <table border="1" width="100%" cellpadding="12">
-        <tr>
-            <td align="center">
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">🌍 INOVAÇÃO • EDUCAÇÃO • SUSTENTABILIDADE</span>
+          <h1>Cuidar das plantas ficou <em>mais inteligente.</em></h1>
+          <p>Uma horta que usa sensores e automação para acompanhar a umidade do solo e acionar a irrigação quando a planta precisa de água.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#como-funciona">Descubra como funciona <span>↓</span></a>
+            <a class="btn secondary" href="#componentes">Ver componentes</a>
+          </div>
+          <div class="hero-note"><span>✓</span> Projeto didático com Arduino e componentes de baixa tensão.</div>
+        </div>
+        <div class="hero-art" aria-label="Ilustração de uma planta com sensor de umidade">
+          <div class="art-glow"></div>
+          <div class="float-chip one"><span class="chip-icon">💧</span><span>Umidade monitorada</span></div>
+          <div class="plant-card">
+            <div class="plant-scene">
+              <div class="sun"></div><div class="stem"></div>
+              <div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div><div class="leaf l4"></div><div class="leaf l5"></div>
+              <div class="sensor-stick"></div><div class="water-drop">💧</div><div class="soil"></div>
+            </div>
+            <div class="status-row"><div><div class="status-label">STATUS DO SOLO</div><div class="status-value" id="heroStatus">Umidade adequada</div></div><span class="status-pill" id="heroPill">● Sistema ativo</span></div>
+          </div>
+          <div class="float-chip two"><span class="chip-icon">⚙️</span><span>Irrigação automática</span></div>
+        </div>
+      </div>
+    </section>
 
-                <!-- Coloque aqui a imagem do banner (ex.: img/banner.jpg) -->
-                [ ESPAÇO PARA A IMAGEM DO BANNER ]
-                <!-- <img src="img/banner.jpg" alt="Banner da TechStore" width="100%"> -->
+    <section id="beneficios">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">POR QUE UMA HORTA INTELIGENTE?</span>
+          <h2>Pequenas tecnologias, grandes aprendizados.</h2>
+          <p>O projeto demonstra como a eletrônica e a programação podem ajudar a cuidar dos recursos naturais no dia a dia.</p>
+        </div>
+        <div class="features">
+          <article class="feature"><div class="feature-icon">💧</div><h3>Uso consciente da água</h3><p>A irrigação é acionada de acordo com a leitura do sensor, ajudando a evitar regas desnecessárias quando o sistema está bem calibrado.</p></article>
+          <article class="feature"><div class="feature-icon">🤖</div><h3>Automação na prática</h3><p>O Arduino lê os dados do solo e controla o acionamento da bomba conforme as regras programadas.</p></article>
+          <article class="feature"><div class="feature-icon">🌱</div><h3>Aprendizagem sustentável</h3><p>Uma maneira visual de aprender programação, circuitos, sensores e responsabilidade ambiental.</p></article>
+        </div>
+      </div>
+    </section>
 
-                <h1>TechStore</h1>
-                <p>Informática e Eletrônicos</p>
-            </td>
-        </tr>
-    </table>
+    <section class="how" id="como-funciona">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">DO SENSOR À PLANTA</span>
+          <h2>Como funciona em 4 etapas</h2>
+          <p>O sistema acompanha a umidade e toma uma ação automática de acordo com os limites configurados no código.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><div class="step-number">1</div><h3>Medir</h3><p>O sensor fica inserido no solo e envia uma leitura de umidade ao Arduino.</p></article>
+          <article class="step"><div class="step-number">2</div><h3>Interpretar</h3><p>O programa compara a leitura com os valores definidos durante a calibração.</p></article>
+          <article class="step"><div class="step-number">3</div><h3>Irrigar</h3><p>Se o solo estiver seco, o Arduino aciona o módulo relé, que controla a bomba.</p></article>
+          <article class="step"><div class="step-number">4</div><h3>Exibir</h3><p>O display LCD mostra a umidade estimada e o estado da irrigação.</p></article>
+        </div>
+      </div>
+    </section>
 
+    <section id="circuito">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">VISÃO DO CIRCUITO</span>
+          <h2>Um circuito simples de entender</h2>
+          <p>Este diagrama resume as ligações principais do modelo demonstrativo com Arduino Uno.</p>
+        </div>
+        <div class="diagram-wrap">
+          <svg class="diagram" viewBox="0 0 1000 430" role="img" aria-label="Diagrama simplificado de ligações da horta inteligente">
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#607469"/></marker>
+            </defs>
+            <rect x="350" y="145" width="280" height="155" rx="22" fill="#145c37"/>
+            <text x="490" y="190" fill="#fff" font-size="24" font-weight="800" text-anchor="middle">ARDUINO UNO</text>
+            <text x="490" y="220" fill="#d8f7e2" font-size="15" text-anchor="middle">Controlador central</text>
+            <rect x="30" y="50" width="220" height="105" rx="16" fill="#e8f6ed" stroke="#91cba4" stroke-width="2"/>
+            <text x="140" y="84" fill="#164d2d" font-size="18" font-weight="800" text-anchor="middle">Sensor de umidade</text>
+            <text x="140" y="111" fill="#426553" font-size="15" text-anchor="middle">VCC • GND • AO</text>
+            <path d="M250 110 H300 V235 H350" stroke="#38a85f" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+            <rect x="750" y="50" width="220" height="105" rx="16" fill="#fff2db" stroke="#e9bd6b" stroke-width="2"/>
+            <text x="860" y="84" fill="#71430b" font-size="18" font-weight="800" text-anchor="middle">Módulo relé 5 V</text>
+            <text x="860" y="111" fill="#805b25" font-size="15" text-anchor="middle">VCC • GND • IN</text>
+            <path d="M630 190 H690 V110 H750" stroke="#e2a52c" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+            <rect x="750" y="250" width="220" height="105" rx="16" fill="#eaf2ff" stroke="#9ab9ed" stroke-width="2"/>
+            <text x="860" y="284" fill="#214d8a" font-size="18" font-weight="800" text-anchor="middle">Bomba de água</text>
+            <text x="860" y="311" fill="#47648b" font-size="15" text-anchor="middle">Fonte própria adequada</text>
+            <path d="M860 155 V205 V250" stroke="#4f79c8" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+            <rect x="30" y="270" width="220" height="105" rx="16" fill="#f0eaff" stroke="#c1a9ef" stroke-width="2"/>
+            <text x="140" y="304" fill="#55328e" font-size="18" font-weight="800" text-anchor="middle">Display LCD I²C</text>
+            <text x="140" y="331" fill="#6d5791" font-size="15" text-anchor="middle">VCC • GND • SDA • SCL</text>
+            <path d="M350 270 H300 V322 H250" stroke="#9067c8" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+            <rect x="330" y="345" width="320" height="58" rx="13" fill="#fff7e8" stroke="#e7c985"/>
+            <text x="490" y="369" fill="#7a4b10" font-size="14" font-weight="800" text-anchor="middle">ATENÇÃO À ALIMENTAÇÃO</text>
+            <text x="490" y="389" fill="#7a4b10" font-size="12" text-anchor="middle">A bomba não deve ser alimentada pelo pino 5 V do Arduino.</text>
+          </svg>
+          <p class="diagram-caption">Mapa conceitual para divulgação. Confira a pinagem do seu módulo e o esquema elétrico específico antes de energizar o circuito.</p>
+        </div>
+      </div>
+    </section>
 
-    <!-- ============================================================ -->
-    <!-- MENU DE NAVEGAÇÃO                                             -->
-    <!-- ============================================================ -->
-    <table border="1" width="100%" cellpadding="8">
-        <tr>
-            <td align="center">
-                <a href="#">Início</a> |
-                <a href="#produtos">Produtos</a> |
-                <a href="#sobre">Sobre</a> |
-                <a href="#contato">Contato</a>
-            </td>
-        </tr>
-    </table>
+    <section id="componentes">
+      <div class="container parts-grid">
+        <div>
+          <span class="eyebrow">O QUE É UTILIZADO</span>
+          <h2 style="margin-top:16px">Componentes do projeto</h2>
+          <p style="color:var(--muted); margin-bottom:24px">O conjunto pode variar conforme os materiais disponíveis na escola. O importante é manter a montagem organizada e segura.</p>
+          <div class="parts-list">
+            <div class="part"><div class="emoji">🧠</div><div><strong>Arduino Uno</strong><span>Lê o sensor e executa o programa de controle.</span></div></div>
+            <div class="part"><div class="emoji">🌡️</div><div><strong>Sensor de umidade do solo</strong><span>Detecta mudanças na umidade do substrato.</span></div></div>
+            <div class="part"><div class="emoji">🔌</div><div><strong>Módulo relé compatível</strong><span>Funciona como interruptor controlado pelo Arduino.</span></div></div>
+            <div class="part"><div class="emoji">💧</div><div><strong>Mini bomba e mangueira</strong><span>Levam água do reservatório até o vaso.</span></div></div>
+            <div class="part"><div class="emoji">📟</div><div><strong>Display LCD I²C</strong><span>Exibe a leitura e o estado da irrigação.</span></div></div>
+          </div>
+        </div>
+        <div class="demo-panel" id="demonstracao">
+          <span class="eyebrow" style="background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.18);color:#e2ffe9">DEMONSTRAÇÃO INTERATIVA</span>
+          <h3>Experimente a lógica do sistema</h3>
+          <p>Altere a condição do solo para ver como o sistema de exemplo reagiria. Esta simulação não controla hardware real.</p>
+          <div class="demo-stats"><span>Umidade simulada</span><strong><span id="moistureValue">42</span>%</strong></div>
+          <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+          <div class="demo-stats"><span>Estado da bomba</span><strong id="pumpState" style="font-size:1rem">Desligada</strong></div>
+          <div class="demo-controls">
+            <button type="button" data-moisture="20">Solo seco</button>
+            <button type="button" data-moisture="42">Umidade média</button>
+            <button type="button" data-moisture="68">Solo úmido</button>
+          </div>
+          <div class="demo-message" id="demoMessage" aria-live="polite">Solo com umidade suficiente. A bomba permanece desligada.</div>
+        </div>
+      </div>
+    </section>
 
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">APRENDER FAZENDO</span>
+          <h2>O que esse projeto ensina?</h2>
+        </div>
+        <div class="benefits">
+          <div class="benefit"><div style="font-size:2rem">💻</div><b>Programação</b><p>Condições, leituras e controle de saídas.</p></div>
+          <div class="benefit"><div style="font-size:2rem">🔧</div><b>Eletrônica</b><p>Sensores, conexões e circuitos de controle.</p></div>
+          <div class="benefit"><div style="font-size:2rem">♻️</div><b>Sustentabilidade</b><p>Uso consciente dos recursos naturais.</p></div>
+          <div class="benefit"><div style="font-size:2rem">🤝</div><b>Trabalho em equipe</b><p>Planejamento, testes e apresentação.</p></div>
+        </div>
+      </div>
+    </section>
 
-    <!-- ============================================================ -->
-    <!-- PRODUTOS                                                      -->
-    <!-- Tabela com imagens e textos. Cada célula tem um espaço em    -->
-    <!-- branco para a imagem do eletrônico.                          -->
-    <!-- ============================================================ -->
-    <h2 id="produtos">Nossos Produtos</h2>
+    <div class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <div><h2>Uma ideia que une tecnologia e natureza.</h2><p>Use a Horta Inteligente como demonstração de como sensores e programação podem resolver problemas do cotidiano.</p></div>
+          <a class="btn" href="#contato">Fale sobre o projeto ↗</a>
+        </div>
+      </div>
+    </div>
 
-    <table border="1" width="100%" cellpadding="12">
+    <section id="contato" style="padding-top:0">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">VAMOS CONVERSAR</span>
+          <h2>Conheça mais sobre a Horta Inteligente</h2>
+          <p>Use o formulário para preparar uma mensagem sobre o projeto. Como este é um site demonstrativo, ele abrirá seu aplicativo de e-mail.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Horta Inteligente 🌱</h3>
+            <p>Projeto educacional de automação para demonstrar irrigação baseada na umidade do solo.</p>
+            <div class="contact-line">📚 <strong>Área:</strong> Tecnologia e inovação</div>
+            <div class="contact-line">🌎 <strong>Foco:</strong> Sustentabilidade</div>
+            <div class="contact-line">⚙️ <strong>Tecnologia:</strong> Arduino e sensores</div>
+            <p style="font-size:.84rem;margin-top:24px">Edite esta área com o nome da equipe, da escola e os contatos oficiais antes de publicar.</p>
+          </div>
+          <form id="contactForm">
+            <label for="name">Seu nome</label>
+            <input id="name" name="name" placeholder="Digite seu nome" required>
+            <label for="email">Seu e-mail</label>
+            <input id="email" name="email" type="email" placeholder="voce@exemplo.com" required>
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" placeholder="Quero saber mais sobre o projeto..." required></textarea>
+            <button class="btn" type="submit">Preparar mensagem ↗</button>
+            <p class="form-hint">O formulário não armazena dados. Ele prepara um e-mail no seu dispositivo; é necessário configurar o destinatário no código antes de usar oficialmente.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        <!-- LINHA 1 -->
-        <tr>
-            <td align="center" width="33%">
-                <img src="notbook gamer.webp">
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/notebook.jpg" alt="Notebook Gamer" width="150"> -->
-                <h3>Notebook Gamer</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 10.500,00 </p>
-            </td>
+  <footer>
+    <div class="container footer-inner">
+      <div><strong>🌱 Horta Inteligente</strong><br>Projeto de tecnologia e sustentabilidade.</div>
+      <div>© <span id="year"></span> • Feito para aprender e inovar.</div>
+      <a class="back-top" href="#inicio">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-            <td align="center" width="33%">
-                <img src="monitor .jpeg"
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/monitor.jpg" alt="Monitor" width="150"> -->
-                <h3>Monitor 24"</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ R$ 750,00</p>
-            </td>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.textContent = isOpen ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.textContent = '☰';
+    }));
 
-            <td align="center" width="33%">
-                <img src="teclado.jpeg"
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/teclado.jpg" alt="Teclado" width="150"> -->
-                <h3>Teclado Mecânico</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 450,00/p>
-            </td>
-        </tr>
+    const moistureValue = document.getElementById('moistureValue');
+    const meterFill = document.getElementById('meterFill');
+    const pumpState = document.getElementById('pumpState');
+    const demoMessage = document.getElementById('demoMessage');
+    const heroStatus = document.getElementById('heroStatus');
+    const heroPill = document.getElementById('heroPill');
+    function setMoisture(value) {
+      moistureValue.textContent = value;
+      meterFill.style.width = value + '%';
+      const dry = value < 35;
+      pumpState.textContent = dry ? 'Ligada (simulação)' : 'Desligada';
+      demoMessage.textContent = dry
+        ? 'Solo seco: no modelo demonstrativo, o programa acionaria a bomba por um intervalo controlado.'
+        : value >= 50
+          ? 'Solo úmido: a bomba permanece desligada para evitar rega desnecessária.'
+          : 'Solo com umidade suficiente: a bomba permanece desligada.';
+      heroStatus.textContent = dry ? 'Solo precisa de água' : value >= 50 ? 'Solo úmido' : 'Umidade adequada';
+      heroPill.textContent = dry ? '● Irrigação simulada' : '● Sistema ativo';
+      heroPill.style.color = dry ? '#8a4c00' : '#0d7c40';
+      heroPill.style.background = dry ? '#fff0d3' : '#e1f7e8';
+    }
+    document.querySelectorAll('[data-moisture]').forEach(button => {
+      button.addEventListener('click', () => setMoisture(Number(button.dataset.moisture)));
+    });
+    setMoisture(42);
 
-        <!-- LINHA 2 -->
-        <tr>
-            <td align="center" width="33%">
-                <img src="mouse .jpg">
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/mouse.jpg" alt="Mouse" width="150"> -->
-                <h3>Mouse sem fio</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 240,00</p>
-            </td>
-
-            <td align="center" width="33%">
-                <img src="ssd.jpeg">
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/ssd.jpg" alt="SSD" width="150"> -->
-                <h3>SSD 1TB</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 430,00 </p>
-            </td>
-
-            <td align="center" width="33%">
-                <img src="headset.jpeg">
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/headset.jpg" alt="Headset" width="150"> -->
-                <h3>Headset Gamer</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 199,00</p>
-            </td>
-        </tr>
-
-    </table>
-
-
-    <!-- ============================================================ -->
-    <!-- SOBRE                                                         -->
-    <!-- ============================================================ -->
-    <h2 id="sobre">Sobre a loja</h2>
-    <p>Escreva aqui um texto sobre a TechStore.</p>
-
-
-    <!-- ============================================================ -->
-    <!-- RODAPÉ (personalize à vontade)                               -->
-    <!-- ============================================================ -->
-    <table border="1" width="100%" cellpadding="12">
-        <tr>
-            <td align="center">
-                <!-- Personalize: contato, endereço, redes sociais, etc. -->
-                <p>&copy; 2026 TechStore — Personalize este rodapé.</p>
-                <p>[ Endereço ] &nbsp; | &nbsp; [ Telefone ] &nbsp; | &nbsp; [ E-mail ]</p>
-            </td>
-        </tr>
-    </table>
-
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const toast = document.getElementById('toast');
+    document.getElementById('contactForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      // Troque o endereço abaixo pelo e-mail oficial da equipe antes de divulgar.
+      const recipient = 'contato@exemplo.com';
+      const subject = encodeURIComponent('Contato sobre a Horta Inteligente');
+      const body = encodeURIComponent(`Nome: ${name}\nE-mail: ${email}\n\nMensagem:\n${message}`);
+      if (recipient === 'contato@exemplo.com') {
+        toast.textContent = 'Formulário demonstrativo: edite contato@exemplo.com no código para usar o e-mail real da equipe.';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 5000);
+      } else {
+        window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+      }
+    });
+  </script>
 </body>
 </html>

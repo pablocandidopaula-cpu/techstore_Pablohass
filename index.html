@@ -1,137 +1,158 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexatech Gamer X1</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0f14;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #111827, #172554);
+      padding: 28px 8%;
+      text-align: center;
+      border-bottom: 2px solid #2563eb;
+    }
+    header h1 { font-size: 2.4rem; }
+    header p { color: #cbd5e1; margin-top: 5px; }
+    .hero {
+      padding: 55px 8%;
+      text-align: center;
+      background: radial-gradient(circle at center, #172554, #0b0f14 65%);
+    }
+    .hero h2 { font-size: 2.5rem; margin-bottom: 12px; }
+    .hero .slogan { color: #60a5fa; font-size: 1.2rem; margin-bottom: 20px; }
+    .price {
+      display: inline-block;
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 18px 0;
+    }
+    .button {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      padding: 13px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .button:hover { background: #1d4ed8; }
+    section {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 45px 8%;
+    }
+    h3 { font-size: 1.7rem; margin-bottom: 20px; color: #60a5fa; }
+    .description {
+      background: #111827;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid #263244;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+    .card {
+      background: #111827;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #263244;
+    }
+    .card strong { color: #93c5fd; }
+    ul { list-style: none; }
+    li {
+      background: #111827;
+      margin: 10px 0;
+      padding: 14px 18px;
+      border-radius: 9px;
+      border-left: 4px solid #2563eb;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #070a0e;
+      color: #94a3b8;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ============================================================ -->
-    <!-- CABEÇALHO / BANNER                                            -->
-    <!-- Espaço em branco para inserir a imagem do banner.            -->
-    <!-- ============================================================ -->
-    <table border="1" width="100%" cellpadding="12">
-        <tr>
-            <td align="center">
+<header>
+  <h1>NEXATECH INFORMÁTICA</h1>
+  <p>Tecnologia, desempenho e inovação</p>
+</header>
 
-                <!-- Coloque aqui a imagem do banner (ex.: img/banner.jpg) -->
-                [ ESPAÇO PARA A IMAGEM DO BANNER ]
-                <!-- <img src="img/banner.jpg" alt="Banner da TechStore" width="100%"> -->
+<section class="hero">
+  <h2>💻 Nexatech Gamer X1</h2>
+  <p class="slogan">“Potência para jogar sem limites.”</p>
+  <p>Um PC gamer desenvolvido para jogos, estudos, edição e multitarefas.</p>
+  <div class="price">R$ 5.499,00</div><br>
+  <a class="button" href="#contato">Tenho interesse</a>
+</section>
 
-                <h1>TechStore</h1>
-                <p>Informática e Eletrônicos</p>
-            </td>
-        </tr>
-    </table>
+<section>
+  <h3>📋 Descrição do produto</h3>
+  <div class="description">
+    O <strong>Nexatech Gamer X1</strong> é um PC gamer fictício da Nexatech Informática,
+    criado para oferecer alto desempenho e uma experiência moderna para gamers e usuários
+    que precisam de potência no dia a dia.
+  </div>
+</section>
 
+<section>
+  <h3>⚙️ Principais características</h3>
+  <div class="grid">
+    <div class="card"><strong>Processador</strong><br>AMD Ryzen 5 5600</div>
+    <div class="card"><strong>Placa de vídeo</strong><br>NVIDIA GeForce RTX 4060 8 GB</div>
+    <div class="card"><strong>Memória RAM</strong><br>16 GB DDR4</div>
+    <div class="card"><strong>Armazenamento</strong><br>SSD NVMe 1 TB</div>
+    <div class="card"><strong>Sistema</strong><br>Windows 11</div>
+    <div class="card"><strong>Conectividade</strong><br>Wi-Fi e Bluetooth</div>
+    <div class="card"><strong>Refrigeração</strong><br>Sistema otimizado</div>
+    <div class="card"><strong>Visual</strong><br>Gabinete com iluminação RGB</div>
+  </div>
+</section>
 
-    <!-- ============================================================ -->
-    <!-- MENU DE NAVEGAÇÃO                                             -->
-    <!-- ============================================================ -->
-    <table border="1" width="100%" cellpadding="8">
-        <tr>
-            <td align="center">
-                <a href="#">Início</a> |
-                <a href="#produtos">Produtos</a> |
-                <a href="#sobre">Sobre</a> |
-                <a href="#contato">Contato</a>
-            </td>
-        </tr>
-    </table>
+<section>
+  <h3>🎮 Benefícios</h3>
+  <ul>
+    <li>🚀 <strong>Alto desempenho:</strong> roda jogos e programas pesados com maior fluidez.</li>
+    <li>🎯 <strong>Ótima experiência nos jogos:</strong> gráficos e desempenho voltados para Full HD.</li>
+    <li>⚡ <strong>Inicialização rápida:</strong> o SSD NVMe ajuda a abrir o sistema e os programas rapidamente.</li>
+    <li>🧠 <strong>Multitarefas:</strong> 16 GB de RAM permitem utilizar vários programas simultaneamente.</li>
+    <li>💡 <strong>Design moderno:</strong> gabinete com iluminação RGB e visual gamer.</li>
+    <li>❄️ <strong>Boa refrigeração:</strong> ajuda a manter os componentes em temperaturas adequadas.</li>
+    <li>📚 <strong>Versátil:</strong> pode ser usado para estudos, edição de vídeos e outras atividades.</li>
+    <li>🔧 <strong>Possibilidade de upgrades:</strong> permite futuras atualizações dos componentes.</li>
+  </ul>
+</section>
 
+<section>
+  <h3>👥 Público-alvo</h3>
+  <div class="description">
+    Gamers, estudantes e usuários que procuram um computador potente para jogos,
+    estudos, edição de vídeos e outras tarefas.
+  </div>
+</section>
 
-    <!-- ============================================================ -->
-    <!-- PRODUTOS                                                      -->
-    <!-- Tabela com imagens e textos. Cada célula tem um espaço em    -->
-    <!-- branco para a imagem do eletrônico.                          -->
-    <!-- ============================================================ -->
-    <h2 id="produtos">Nossos Produtos</h2>
+<section id="contato" style="text-align:center;">
+  <h3>📞 Entre em contato</h3>
+  <p>Gostou do Nexatech Gamer X1? Entre em contato com a Nexatech Informática.</p>
+  <br>
+  <a class="button" href="mailto:contato@nexatech.com">Solicitar informações</a>
+</section>
 
-    <table border="1" width="100%" cellpadding="12">
-
-        <!-- LINHA 1 -->
-        <tr>
-            <td align="center" width="33%">
-                <img src="notbook gamer.webp">
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/notebook.jpg" alt="Notebook Gamer" width="150"> -->
-                <h3>Notebook Gamer</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 10.500,00 </p>
-            </td>
-
-            <td align="center" width="33%">
-                <img src="monitor .jpeg"
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/monitor.jpg" alt="Monitor" width="150"> -->
-                <h3>Monitor 24"</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ R$ 750,00</p>
-            </td>
-
-            <td align="center" width="33%">
-                <img src="teclado.jpeg"
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/teclado.jpg" alt="Teclado" width="150"> -->
-                <h3>Teclado Mecânico</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 450,00/p>
-            </td>
-        </tr>
-
-        <!-- LINHA 2 -->
-        <tr>
-            <td align="center" width="33%">
-                <img src="mouse .jpg">
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/mouse.jpg" alt="Mouse" width="150"> -->
-                <h3>Mouse sem fio</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 240,00</p>
-            </td>
-
-            <td align="center" width="33%">
-                <img src="ssd.jpeg">
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/ssd.jpg" alt="SSD" width="150"> -->
-                <h3>SSD 1TB</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 430,00 </p>
-            </td>
-
-            <td align="center" width="33%">
-                <img src="headset.jpeg">
-                [ IMAGEM DO PRODUTO ]<br>
-                <!-- <img src="img/headset.jpg" alt="Headset" width="150"> -->
-                <h3>Headset Gamer</h3>
-                <p>Descrição do produto aqui.</p>
-                <p>R$ 199,00</p>
-            </td>
-        </tr>
-
-    </table>
-
-
-    <!-- ============================================================ -->
-    <!-- SOBRE                                                         -->
-    <!-- ============================================================ -->
-    <h2 id="sobre">Sobre a loja</h2>
-    <p>Escreva aqui um texto sobre a TechStore.</p>
-
-
-    <!-- ============================================================ -->
-    <!-- RODAPÉ (personalize à vontade)                               -->
-    <!-- ============================================================ -->
-    <table border="1" width="100%" cellpadding="12">
-        <tr>
-            <td align="center">
-                <!-- Personalize: contato, endereço, redes sociais, etc. -->
-                <p>&copy; 2026 TechStore — Personalize este rodapé.</p>
-                <p>[ Endereço ] &nbsp; | &nbsp; [ Telefone ] &nbsp; | &nbsp; [ E-mail ]</p>
-            </td>
-        </tr>
-    </table>
+<footer>
+  <p>© 2026 Nexatech Informática — Produto fictício para atividade escolar.</p>
+</footer>
 
 </body>
 </html>
